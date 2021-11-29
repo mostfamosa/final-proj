@@ -1,0 +1,18 @@
+.row{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content:space-around;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-bottom: 50px;
+}
+.item{
+    width:90%;
+    height: 40px;
+    padding-left: 10px;
+    border-radius: 10px;
+    font-style: italic;
+    font-size: 24px;
+    color: black;
+
+}
