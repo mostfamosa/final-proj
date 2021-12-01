@@ -60,7 +60,7 @@ class Sensorsinfo extends Component {
                     <input placeholder="Temp Reading :" id='pileRadius' required readOnly className='item block' type="input" />
                 </div>
 
-                <p className='ph3 pa6'>
+                <p className='ph3 pa4'>
                     <Link to="" className='w-25 serif ma3 w-10 f2 br4 link dim ph2 pv2 mb2 dib black bg-light-blue bw2 bl bb i' >Home</Link>
                     <Link to="/progressBarPage" className='w-25 serif  ma3 w-10 f2 br4 link dim ph2 pv2 mb2 dib black bg-light-pink bw2 bl bb i' >Next</Link>
                 </p>
