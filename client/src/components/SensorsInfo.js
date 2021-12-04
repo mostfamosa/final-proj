@@ -14,15 +14,13 @@ import { rand } from './helpFunc'
 let mySensors = [];
 
 function Sensorsinfo() {
-    // const location = useLocation()
-    // const { moose } = location.state
+    const location = useLocation()
+    const { pileId,sesnsorsCount,pileheight,pileradius } = location.state
 
-    const [moose2]=useState(5);
     const [sensorID, setrandId] = useState(0);
     const [value, setValue]=useState(false);
-    const [sensorsNumber]=useState(5);
-    const [pileheight]=useState(100);
-    const [pileradius]=useState(10);
+    const [sensorsNumber]=useState(sesnsorsCount);
+    const [pileID]=useState(pileId);
     const [outsideTemp,setoutsideTemp]=useState("");
     const [Temp,setTemp]=useState("");
     const [sensorStatus,setStatus]=useState(false);
@@ -56,10 +54,10 @@ function Sensorsinfo() {
 
 
 
-    sensonrsInt(5);//change to moose
+    sensonrsInt(sensorsNumber);//change to moose
 
-    function sensonrsInt(moose) {
-        for (let index = 1; index <= moose; index++) {
+    function sensonrsInt(sensorsNumber) {
+        for (let index = 1; index <= sensorsNumber; index++) {
             Sensoroptions.push({ value: index, label: index });
         }
     }
@@ -69,7 +67,7 @@ function Sensorsinfo() {
         let flag=true;
         if(mySensors.length===0)
         {
-            mySensors.push({id: sensorID,outsideTemp:outsideTemp,x:myX,y:myY,z: myZ,Temp:Temp,Status:value});
+            mySensors.push({pileid: pileID,id: sensorID,outsideTemp:outsideTemp,x:myX,y:myY,z: myZ,Temp:Temp,Status:value});
         }
         else
         {
@@ -83,7 +81,7 @@ function Sensorsinfo() {
 
             }
             if(flag)
-                mySensors.push({id: sensorID,outsideTemp:outsideTemp,x:myX,y:myY,z: myZ,Temp:Temp,Status:value});
+                mySensors.push({pileid: pileID,id: sensorID,outsideTemp:outsideTemp,x:myX,y:myY,z: myZ,Temp:Temp,Status:value});
                 
             
                 
@@ -161,7 +159,7 @@ function Sensorsinfo() {
 
                 <p className='ph3 pa4'>
                     <Link to="" className='w-25 serif ma3 w-10 f2 br4 link dim ph2 pv2 mb2 dib black bg-light-blue bw2 bl bb i' >Home</Link>
-                    <Link onClick={renderRedirect} to="/progressBarPage" className='w-25 serif  ma3 w-10 f2 br4 link dim ph2 pv2 mb2 dib black bg-light-pink bw2 bl bb i' >Next</Link>
+                    <Link onClick={renderRedirect} to={{ pathname: "/progressBarPage", state: { pileId:pileID  } }} className='w-25 serif  ma3 w-10 f2 br4 link dim ph2 pv2 mb2 dib black bg-light-pink bw2 bl bb i' >Next</Link>
                 </p>
             </div>
         );

@@ -1,26 +1,26 @@
-import React, { Component} from 'react'
+import React, { Component, useEffect, useState } from 'react'
 import './SensorsInfo.css'
 import './ProgressBar.css'
 import ProgressFile from './progressfile'
 import ReportPage from './reportPage'
+import { useLocation} from 'react-router-dom'
 
-class progressBarPage extends Component{
-    state = {
-        redirect: false
-      }
-      componentDidMount() {
-        this.id = setTimeout(() => this.setState({ redirect: true }), 1000)
-      }
-    
-      componentWillUnmount() {
-        clearTimeout(this.id)
-      }
-    
-    render() {
-        
-        return this.state.redirect ? <ReportPage />:<ProgressFile/>
-            
-    
-  }
+
+function ProgressBarPage() {
+
+  const location = useLocation()
+  const { pileId } = location.state
+
+  const [redirect, setredirect] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setredirect(true)   
+                
+    }, 1000);
+  });
+
+  console.log(redirect);
+  return redirect ? <ReportPage myprops={pileId} /> : <ProgressFile />
 }
-export default progressBarPage;
+export default ProgressBarPage;

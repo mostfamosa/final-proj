@@ -141,7 +141,7 @@ function PileInfo(props) {
       <p className='ph3 pa4'>
         <Link to="" type="submit" className='w-25 serif ma3 w-10 f2 br4 link dim ph2 pv2 mb2 dib black bg-light-blue bw2 bl bb i' >Home</Link>
 
-        <Link to={{ pathname: mypath, state: { moose: sesnsorAmount, pileheight: pileheight, pileradius: pileradius, onAddPile: { addPileHandler } } }} onClick={renderRedirect} type="submit" id='next' className='w-25 serif  ma3 w-10 f2 br4 link dim ph2 pv2 mb2 dib black bg-light-pink bw2 bl bb i' >Next</Link>
+        <Link to={{ pathname: mypath, state: { pileId:pileID ,sesnsorsCount: sesnsorAmount, pileheight: pileheight, pileradius: pileradius, onAddPile: { addPileHandler } } }} onClick={renderRedirect} type="submit" id='next' className='w-25 serif  ma3 w-10 f2 br4 link dim ph2 pv2 mb2 dib black bg-light-pink bw2 bl bb i' >Next</Link>
       </p>
 
 

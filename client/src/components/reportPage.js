@@ -1,4 +1,4 @@
-import React, { Component, useState,useEffect } from 'react'
+import React, { useState,useEffect } from 'react'
 import logo from './logo.PNG'
 import { Link } from 'react-router-dom'
 import './reportPage.css'
@@ -6,12 +6,12 @@ import LineChart from './LineChart'
 import ProgressFile from './progressfile'
 
 
-function ReportPage() {
+function ReportPage(props) {
   const [message] = useState("");
   //const [chartData, setChartData] = useState([12, 9, 5, 77, 22, 12, 9, 5, 77, 22, 12]);
   const [chartData, setChartData] = useState([]);
+  const [mypileid] = useState(props.myprops);
   const [isLoading,setIsLoading]=useState(true);
-  
 
 
   useEffect(()=>{
@@ -29,7 +29,9 @@ function ReportPage() {
           ...data[key]
         };
         for (let index = 0; index < data[key].length; index++) {
-          myTempData.push(temps[index].Temp);          
+          console.log(temps[index].pileid);
+          if(temps[index].pileid===mypileid)
+            myTempData.push(temps[index].Temp);          
         }
       }
 
