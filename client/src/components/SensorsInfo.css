@@ -1,5 +1,7 @@
  
-    
+ .row_a{
+     display: flex;
+ }   
 
 .row{
     display: grid;
