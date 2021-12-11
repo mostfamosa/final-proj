@@ -7,6 +7,7 @@ import './SensorsInfo.css'
 import Switch from './Switch'
 import { rand } from './helpFunc'
 //import sensorTable from './SensorTable'
+import axios from 'axios'
 
 
 
@@ -115,6 +116,26 @@ function Sensorsinfo() {
             }
             }
         );
+
+
+ 
+
+
+
+        // axios.post('http://localhost:5000/calculateData',{karam:"ass"},{headers:{'Content-type': 'application/json'}})
+        // .then(resp => resp.data)
+        // .catch(error => console.log(error));
+
+
+        // fetch('http://localhost:8001/calculateData',{
+        //     method: 'POST',
+        //     body: JSON.stringify({karam:"ma g"}),
+        //     headers: {
+        //         'Content-type': 'application/json'
+        //     }
+        //     }
+        // );
+            
     }
 
         useEffect(() => {
