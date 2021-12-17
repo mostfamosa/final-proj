@@ -1,12 +1,13 @@
-from flask import Flask
+from flask import Flask,request
+
 
 app=Flask(__name__)
 
-@app.route("/calculateData")
-def calculateData():
-    print('fuck off\n')
-    return{"zbeeeeeee":["kos","bz"]}
-
+@app.route("/calculateData", methods=['POST'])
+def __calculateData__():
+    from controllers import calculateData
+    data = request.json
+    return calculateData.calculateCut(data[0])
 
 
 

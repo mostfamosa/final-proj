@@ -7,7 +7,6 @@ import ProgressFile from './progressfile'
 
 
 function ReportPage(props) {
-  const [message] = useState("");
   //const [chartData, setChartData] = useState([12, 9, 5, 77, 22, 12, 9, 5, 77, 22, 12]);
   const [chartData, setChartData] = useState([]);
   const [mypileid] = useState(props.myprops);
@@ -40,7 +39,7 @@ function ReportPage(props) {
     });
 
   },[]);
-  
+
 
 if(isLoading){
   return (

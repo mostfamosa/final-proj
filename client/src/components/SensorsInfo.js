@@ -7,7 +7,6 @@ import './SensorsInfo.css'
 import Switch from './Switch'
 import { rand } from './helpFunc'
 //import sensorTable from './SensorTable'
-import axios from 'axios'
 
 
 
@@ -68,7 +67,7 @@ function Sensorsinfo() {
         let flag=true;
         if(mySensors.length===0)
         {
-            mySensors.push({pileid: pileID,id: sensorID,outsideTemp:outsideTemp,x:myX,y:myY,z: myZ,Temp:Temp,Status:value});
+            mySensors.push({pileid: pileID,id: sensorID,outsideTemp:outsideTemp,x:myX,y:myY,z: myZ,Temp:Temp,Status:sensorStatus});
         }
         else
         {
@@ -82,7 +81,7 @@ function Sensorsinfo() {
 
             }
             if(flag)
-                mySensors.push({pileid: pileID,id: sensorID,outsideTemp:outsideTemp,x:myX,y:myY,z: myZ,Temp:Temp,Status:value});
+                mySensors.push({pileid: pileID,id: sensorID,outsideTemp:outsideTemp,x:myX,y:myY,z: myZ,Temp:Temp,Status:sensorStatus});
                 
             
                 
@@ -173,14 +172,14 @@ function Sensorsinfo() {
                     />
                 </div>
                 <div className='row'>
-                    <input readOnly placeholder={"Temp Reading: "+Temp} id='pileRadius' required readOnly className='item block' type="input" />
+                    <input readOnly placeholder={"Temp Reading: "+Temp} id='pileRadius' required className='item block' type="input" />
                
                 </div>
                 <button onClick={saveHandler} className='w-25 serif ma3 w-20 f2 br4 link dim ph2 pv2 mb2 dib black bg-light-green bw2 bl bb i'>Save</button>
 
                 <p className='ph3 pa4'>
                     <Link to="" className='w-25 serif ma3 w-10 f2 br4 link dim ph2 pv2 mb2 dib black bg-light-blue bw2 bl bb i' >Home</Link>
-                    <Link onClick={renderRedirect} to={{ pathname: "/progressBarPage", state: { pileId:pileID  } }} className='w-25 serif  ma3 w-10 f2 br4 link dim ph2 pv2 mb2 dib black bg-light-pink bw2 bl bb i' >Next</Link>
+                    <Link onClick={renderRedirect} to={{ pathname: "/progressBarPage", state: { pileId:pileID } }} className='w-25 serif  ma3 w-10 f2 br4 link dim ph2 pv2 mb2 dib black bg-light-pink bw2 bl bb i' >Next</Link>
                 </p>
             </div>
         );
