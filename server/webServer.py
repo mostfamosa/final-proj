@@ -7,7 +7,8 @@ app=Flask(__name__)
 def __calculateData__():
     from controllers import calculateData
     data = request.json
-    return calculateData.calculateCut(data[0])
+    print(data)
+    return calculateData.calculateCut(data)
 
 
 

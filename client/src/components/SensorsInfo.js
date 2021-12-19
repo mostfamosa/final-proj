@@ -6,17 +6,17 @@ import Select from 'react-select'
 import './SensorsInfo.css'
 import Switch from './Switch'
 import { rand } from './helpFunc'
-//import sensorTable from './SensorTable'
 
 
 
 
-let mySensors = [];
+//let mySensors = [];
 
 function Sensorsinfo() {
     const location = useLocation()
     const { pileId,sesnsorsCount,pileheight,pileradius } = location.state
 
+    const [mySensors]=useState([]);
     const [sensorID, setrandId] = useState(0);
     const [value, setValue]=useState(false);
     const [sensorsNumber]=useState(sesnsorsCount);
@@ -71,8 +71,6 @@ function Sensorsinfo() {
         }
         else
         {
-    
-            console.log(sensorID);
             for (let index = 0; index < mySensors.length; index++) {
                 if(sensorID===mySensors[index].id){
                     console.log("sensor already in");
@@ -117,23 +115,6 @@ function Sensorsinfo() {
         );
 
 
- 
-
-
-
-        // axios.post('http://localhost:5000/calculateData',{karam:"ass"},{headers:{'Content-type': 'application/json'}})
-        // .then(resp => resp.data)
-        // .catch(error => console.log(error));
-
-
-        // fetch('http://localhost:8001/calculateData',{
-        //     method: 'POST',
-        //     body: JSON.stringify({karam:"ma g"}),
-        //     headers: {
-        //         'Content-type': 'application/json'
-        //     }
-        //     }
-        // );
             
     }
 
@@ -179,7 +160,7 @@ function Sensorsinfo() {
 
                 <p className='ph3 pa4'>
                     <Link to="" className='w-25 serif ma3 w-10 f2 br4 link dim ph2 pv2 mb2 dib black bg-light-blue bw2 bl bb i' >Home</Link>
-                    <Link onClick={renderRedirect} to={{ pathname: "/progressBarPage", state: { pileId:pileID } }} className='w-25 serif  ma3 w-10 f2 br4 link dim ph2 pv2 mb2 dib black bg-light-pink bw2 bl bb i' >Next</Link>
+                    <Link onClick={renderRedirect} to={{ pathname: "/progressBarPage", state: { pileId:pileID ,mySensorsData:mySensors } }} className='w-25 serif  ma3 w-10 f2 br4 link dim ph2 pv2 mb2 dib black bg-light-pink bw2 bl bb i' >Next</Link>
                 </p>
             </div>
         );

@@ -7,28 +7,27 @@ import { useLocation} from 'react-router-dom'
 
 
 
-let mySensors = [{pileid: 12,id: 1,outsideTemp:23,x:1,y:1,z: 1,Temp:34,Status:true}];
 function ProgressBarPage() {
 
   const location = useLocation()
-  //const { pileId } = location.state
+  const { pileId ,mySensorsData} = location.state
 
   const [redirect, setredirect] = useState(false);
   const [myServerData,setServerData]=useState([{}]);
   const [progressTime,setprogress]=useState(1000);
 
-  const data=mySensors;
 
 
   useEffect(() => {
-
+    console.log("******")
+    console.log(mySensorsData);
     setTimeout(() => {
       if(myServerData.length===1)
       {
         fetch("/calculateData"
         , {
           method: 'POST',
-          body: JSON.stringify(mySensors),
+          body: JSON.stringify(mySensorsData),
           headers: {
               'Content-type': 'application/json'
           }
@@ -38,7 +37,8 @@ function ProgressBarPage() {
             ).then(
               data=>{
                   setServerData(data)
-                  console.log(myServerData)
+                  console.log("the data recieved from server: ")
+                  console.log(data)
               }
           )
         console.log("from server ");
@@ -56,6 +56,6 @@ function ProgressBarPage() {
   });
 
 
-  return redirect ? <ReportPage myprops={22} /> : <ProgressFile />
+  return redirect ? <ReportPage myprops={pileId} serverData={myServerData.data} /> : <ProgressFile />
 }
 export default ProgressBarPage;

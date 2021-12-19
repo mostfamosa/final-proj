@@ -64,8 +64,7 @@ function PileInfo(props) {
       sesnsorsCount: sesnsorAmount,
       hasDefect: enteredpileDefect,
     };
-    // console.log(pileData);
-    // props.PileInfo(pileData);
+   
 
     if (!redirect) {
       if (pileRadius1.value === "" || pileHeight1.value === "" || pileDepth1.value === "") {
@@ -76,9 +75,6 @@ function PileInfo(props) {
         addPileHandler(pileData);
         setRedirect();
         changeMypath();
-        //history.push("/SensorsInfo");
-        //return <Redirect to={{ pathname: "/SensorsInfo", state: { moose: sesnsorAmount } }} />
-
       }
     }
   }

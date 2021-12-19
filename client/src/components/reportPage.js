@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import logo from './logo.PNG'
 import { Link } from 'react-router-dom'
 import './reportPage.css'
@@ -7,45 +7,66 @@ import ProgressFile from './progressfile'
 
 
 function ReportPage(props) {
-  //const [chartData, setChartData] = useState([12, 9, 5, 77, 22, 12, 9, 5, 77, 22, 12]);
   const [chartData, setChartData] = useState([]);
   const [mypileid] = useState(props.myprops);
-  const [isLoading,setIsLoading]=useState(true);
+  const [serverData] = useState(props.serverData)
+  const [isLoading, setIsLoading] = useState(true);
+  const [myTempData] = useState([]);
+  
+  const init=()=>{
+    for (let index = 0; index < serverData.length; index++) {
+      if (serverData[index].pileid === mypileid) 
+        myTempData.push(serverData[index].Temp);
+
+    }
+    setChartData(myTempData);
+  }
+  
+  useEffect(() => {
+    
+    init();
+    setIsLoading(false);
+  
+    
+
+    // setIsLoading(true);
+    // fetch('https://buildtech-final-project-default-rtdb.firebaseio.com/sensors.json'
+    // ).then(response=>{
+    //   return response.json();
+    // }).then(data =>{
+
+    //   const myTempData =[];
+
+    //   for (const key in data) {
+    //     const temps ={
+    //       id : key,
+    //       ...data[key]
+    //     };
+    //     for (let index = 0; index < data[key].length; index++) {
+    //      // console.log(temps[index].pileid);
+    //       if(temps[index].pileid===mypileid)
+    //         myTempData.push(temps[index].Temp);          
+    //     }
+    //   }
+    //   console.log("myTempData");
+    //   console.log(myTempData);
+    //   setIsLoading(false);
+    //   setChartData(myTempData);
+    // });
+
+    
+// eslint-disable-next-line
+  }, []);
 
 
-  useEffect(()=>{
-    setIsLoading(true);
-    fetch('https://buildtech-final-project-default-rtdb.firebaseio.com/sensors.json'
-    ).then(response=>{
-      return response.json();
-    }).then(data =>{
-
-      const myTempData =[];
-
-      for (const key in data) {
-        const temps ={
-          id : key,
-          ...data[key]
-        };
-        for (let index = 0; index < data[key].length; index++) {
-          console.log(temps[index].pileid);
-          if(temps[index].pileid===mypileid)
-            myTempData.push(temps[index].Temp);          
-        }
-      }
-
-      setIsLoading(false);
-      setChartData(myTempData);
-    });
-
-  },[]);
+  
 
 
-if(isLoading){
-  return (
-<ProgressFile/>
-  );
-}
+  if (isLoading) {
+    return (
+      <ProgressFile />
+    );
+  }
 
   return (
     <div className='container pa4 tc'>

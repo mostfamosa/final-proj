@@ -1,6 +1,5 @@
 
 
 def calculateCut(data):
-
-    return data
+    return {"data":data}
         
