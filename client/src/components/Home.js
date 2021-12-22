@@ -1,9 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 import logo from './logo.PNG'
 import { Link } from 'react-router-dom'
 
-class Home extends Component {
-  render() {
+
+function Home () {
+  
     return (
       <div className='container pa4 tc'>
         <img className='f1' src={logo} alt='App logo' />
@@ -21,6 +22,7 @@ class Home extends Component {
         </footer>
       </div>
     );
-  }
+
 }
+
 export default Home;

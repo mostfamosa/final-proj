@@ -23,10 +23,23 @@ function ReportPage(props) {
   }
   
   useEffect(() => {
+    const resultData = {
+      resultTime:Date().toLocaleString(),
+      result:myTempData,
+    };
     
     init();
     setIsLoading(false);
   
+    fetch('https://buildtech-final-project-default-rtdb.firebaseio.com/results.json'
+    , {
+      method: 'POST',
+      body: JSON.stringify(resultData),
+      headers: {
+        'Content-type': 'application/json'
+      }
+    }
+    );
     
 
     // setIsLoading(true);

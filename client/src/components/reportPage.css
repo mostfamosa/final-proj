@@ -2,14 +2,16 @@
     
 
 .row{
+    display: -ms-grid;
     display: grid;
-    grid-template-columns: 1fr 1fr ;
+    grid-template-columns: 1fr 1fr;
     justify-content:space-around;
     margin-left: 25%;
     margin-right: 25%;
     margin-bottom: 50px;
 }
 .row3{
+    display: -ms-grid;
     display: grid;
     grid-template-columns: 1fr;
     justify-content:space-around;
@@ -28,6 +30,7 @@
 
 }
 .row2{
+    display: -ms-grid;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     justify-content:space-around;
@@ -57,4 +60,10 @@
 }
 .graph{
     background: black;
+}
+.item3{
+    width:90%;
+    margin-bottom: 50px;
+    margin-left: 5%;
+   
 }

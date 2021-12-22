@@ -3,9 +3,6 @@ import { Line } from 'react-chartjs-2'
 const BarChart = (props) => {
 
     const chartData = props.mydata;
-    //chartData.push(10);
-
-
 
 
     return <div>

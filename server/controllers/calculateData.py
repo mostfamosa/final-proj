@@ -1,5 +1,5 @@
 
 
-def calculateCut(data):
+def calculateCut(data):                                       
     return {"data":data}
         
