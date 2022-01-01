@@ -28,7 +28,7 @@ function Reports() {
                 console.log(mychartsData);
             }
             for (let index = 0; index < mychartsData.length; index++) {
-                reportsList.push(<div key={index} className='item3'><h2>{mychartsData[index].resultTime}</h2><div className="graph"><LineChart mydata={mychartsData[index].result} /></div></div>);
+                reportsList.push(<div key={index} className='item3'><h2>{mychartsData[index].resultTime}</h2><h2>Changing of Temperature in Sensor {mychartsData[index].sensorNumber}</h2><div className="graph"><LineChart mydata={mychartsData[index].result[0]} /></div></div>);
             }
             setChart(reportsList);
         });

@@ -1,5 +1,5 @@
 from flask import Flask,request
-
+import json
 
 app=Flask(__name__)
 
@@ -7,9 +7,19 @@ app=Flask(__name__)
 def __calculateData__():
     from controllers import calculateData
     data = request.json
-    print(data)
-    return calculateData.calculateCut(data)
+    #print(data)
+    moose=calculateData.main()
+    josn_dump=json.dumps(moose)
+    # print("//////////////////////////")
+    # print(josn_dump)
+    # print("//////////////////////////")
+    json_object=json.loads(josn_dump)
+    # print("************************")
+    # print(moose)
+    # print("*******************--*******")
 
+
+    return {"data":moose}
 
 
 if __name__ == "__main__":
