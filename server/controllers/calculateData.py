@@ -363,10 +363,10 @@ class clDisign():
 
 def main():
     Disign=clDisign()
-    rBin=0.5#m
+    rBin=0.5#m  radius of the pile
     hMax=5#m
     dl=0.1#m
-    rMax=3#m
+    rMax=3#m   the interesting parts of the ground around the pile
     #1 minute
 
     rBin=0.5#m
@@ -375,8 +375,10 @@ def main():
     rMax=1#m
 
     Disign.startDisign(rBin,hMax,dl,rMax)
-    Disign.restart()
-    dt=20#60#*60
+    Disign.restart() 
+    #return you to the state of initialize temperature
+    #and Hardened State
+    dt=20#60#*60 Time step 
     #iElement=3
     #print(str(Disign.vElement[iElement].Temperature))
     #30 sec
@@ -385,8 +387,8 @@ def main():
     Disign.print_sensors(0,K)
     t=0
     arrr=[]
-    for j in range(2):##############################
-        for i in range(10):
+    for j in range(20):##############################
+        for i in range(100):#each time step
             Disign.timeStep(dt)
             t+=dt
         #print(str(Disign.vElement[iElement].Temperature))

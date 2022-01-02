@@ -22,7 +22,7 @@ function ProgressBarPage() {
     // console.log("******")
     // console.log(mySensorsData);
     setTimeout(() => {
-      if(myServerData.length===1)
+      if(myServerData.length>0)
       {
         fetch("/calculateData"
         , {
@@ -54,7 +54,7 @@ function ProgressBarPage() {
       }    
                 
     }, progressTime);
-  });
+  },[myServerData.length]);
 
 
   return redirect ? <ReportPage myprops={pileId} serverData={myServerData.data} /> : <ProgressFile />

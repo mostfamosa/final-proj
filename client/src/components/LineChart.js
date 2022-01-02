@@ -18,14 +18,6 @@ const BarChart = (props) => {
                         borderColor: 'rgba(250,50,50,1)',
                         backgroundColor: "rgba(255,255,255,1)"
                     },
-                    {
-                        label: 'Temperature Change Expected',
-                        data: [10, 9, 7, 60, 18, 10, 9, 7, 60, 18, 10, 9, 7, 60, 18,9, 7, 60, 18,9, 7, 60, 18,9, 7, 60, 18,9, 7, 60, 18,],
-                        fill: false,
-                        tension: 0.2,
-                        backgroundColor: "rgba(255,255,255,1)",
-                        borderColor: "rgba(50,150,255,1)"
-                    }
                 ]
             }}
             height={400}
