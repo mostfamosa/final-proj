@@ -12,41 +12,58 @@ function ReportPage(props) {
   const [chartData, setChartData] = useState([]);
   const [chartData2, setChartData2] = useState([]);
   const [mypileid] = useState(props.myprops);
-  const [serverData] = useState(props.serverData)
+  const [pileDefect] = useState(props.pileDefect);
+  const [serverData] = useState(props.serverData);
   const [isLoading, setIsLoading] = useState(true);
-  const [myTempData,setmyTempData] = useState([]);
-  const [myTempData2,setmyTempData2] = useState([]);
+  const [myTempData, setmyTempData] = useState([]);
+  const [myTempData2, setmyTempData2] = useState([]);
   const [myTempDataforEachSensor] = useState([]);
-  const [myNEWTempDataforEachSensor] = useState([]);
   let Sensoroptions = [];
-  
-  sensonrsInt(10);//change to moose
+
+  sensonrsInt(serverData[0].length);
 
   function sensonrsInt(sensorsNumber) {
     for (let index = 1; index <= sensorsNumber; index++) {
-        Sensoroptions.push({ value: index, label: index });
+      Sensoroptions.push({ value: index, label: index });
     }
-}
+  }
 
   const init = () => {
     for (let index = 0; index < serverData.length; index++) {
-      for (let index2 = 0; index2 < serverData[index].length; index2++) {
+      for (let index2 = 0; index2 < serverData[0].length; index2++) {
 
         myTempDataforEachSensor.push(serverData[index][index2]);
       }
     }
     console.log("myTempDataforEachSensor")
     console.log(myTempDataforEachSensor)
-    
-
-
   }
+
   const init2 = () => {
-    for (let index = 0; index < 10; index++) {
-      for (let index2 = index; index2 < myTempDataforEachSensor.length; index2+=10) {
+    for (let index = 0; index < serverData[0].length; index++) {
+      for (let index2 = index; index2 < myTempDataforEachSensor.length; index2 += serverData[0].length) {
         myTempData2.push(parseFloat(myTempDataforEachSensor[index2][2]));
-      }  
+      }
     }
+    var comment = "All Sensors";
+    if (pileDefect == 'y')
+      comment = "All Sensors With Defect";
+    else
+      comment = "All Sensors";
+    const resultData2 = {
+      resultTime: Date().toLocaleString(),
+      result: [myTempData2],
+      sensorNumber: comment
+    };
+    fetch('https://buildtech-final-project-default-rtdb.firebaseio.com/results.json'
+      , {
+        method: 'POST',
+        body: JSON.stringify(resultData2),
+        headers: {
+          'Content-type': 'application/json'
+        }
+      }
+    );
     console.log("myTempData2");
     console.log(myTempData2);
     setChartData2(myTempData2);
@@ -59,35 +76,25 @@ function ReportPage(props) {
     // eslint-disable-next-line
   }, []);
 
-  const inoptionHandler = (event) =>{
-    let getsensornumber=event.value;
+  const inoptionHandler = (event) => {
+    let getsensornumber = event.value;
     setmyTempData([]);
-    for (let index = getsensornumber-1; index < myTempDataforEachSensor.length; index+=10) {
-      
+    for (let index = getsensornumber - 1; index < myTempDataforEachSensor.length; index += serverData[0].length) {
+
       myTempData.push(parseFloat(myTempDataforEachSensor[index][2]));
 
-    }  
+    }
 
     const resultData = {
       resultTime: Date().toLocaleString(),
       result: [myTempData],
-      sensorNumber:event.value
+      sensorNumber: event.value
     };
-    fetch('https://buildtech-final-project-default-rtdb.firebaseio.com/results.json'
-      , {
-        method: 'POST',
-        body: JSON.stringify(resultData),
-        headers: {
-          'Content-type': 'application/json'
-        }
-      }
-    );
     setChartData(myTempData);
     console.log("myTempData");
     console.log(myTempData);
     init2();
-    
-}
+  }
 
 
 
@@ -107,8 +114,9 @@ function ReportPage(props) {
       <div className="graph">
         <LineChart mydata={chartData} />
       </div>
+      <h3 className='f2 serif black'>Changing Temperature of All Sensors</h3>
       <div className="graph">
-        <LineChart2 mydata={chartData2} />
+        <LineChart2 mydata={chartData2} sensorsCount={serverData[0].length} />
       </div>
       <p className='ph3 pa6'>
         <Link to="" className='w-25 serif ma3 w-10 f2 br4 link dim ph2 pv2 mb2 dib black bg-light-blue bw2 bl bb i' >Home</Link>

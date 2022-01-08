@@ -6,98 +6,45 @@ import { Line } from 'react-chartjs-2'
 const BarChart2 = (props) => {
 
     const chartData2 = props.mydata;
+    const sensorsAmount = props.sensorsCount;
     console.log("aaaaaaaaaaa");
     console.log(chartData2);
+    var mydataSet = [];
+    let r = 5, g = 70, b = 240;
+    for (let index = 1; index <= sensorsAmount; index++) {
+        let temp = chartData2.splice(0, 20);
+        mydataSet.push({
+            label: 'Sensor ' + index,
+            data: temp,
+            fill: false,
+            tension: 0.2,
+            borderColor: 'rgba(' + r + ', ' + g + ', ' + b + ',1)',
+            backgroundColor: "rgba(255,255,255,1)"
+        });
+        r += (250 - 5) / sensorsAmount;
+        g -= (70 - 7) / sensorsAmount;
+        b -= (240 - 140) / sensorsAmount;
+    }
+    console.log("ssssssssssss");
+    console.log(mydataSet);
+
     return <div>
         <Line
             data={{
                 labels: ["12 AM", "1 AM", "2 AM", "3 AM", "4 AM", "5 AM", "6 AM", "7 AM", "8 AM", "9 AM", "10 AM", "11 AM", "12 PM", "13 PM", "14 PM", "15 PM", "16 PM", "17 PM", "18 PM"],
-                datasets: [
-                    {
-                        label: 'Sensor 1',
-                        data: chartData2.splice(0,20),
-                        fill: false,
-                        tension: 0.2,
-                        borderColor: 'rgba(5, 70, 240,1)',
-                        backgroundColor: "rgba(255,255,255,1)"
-                    },
-                    {
-                        label: 'Sensor 2',
-                        data: chartData2.splice(0,20),
-                        fill: false,
-                        tension: 0.2,
-                        borderColor: 'rgba(75,56,210,1)',
-                        backgroundColor: "rgba(255,255,255,1)"
-                    },
-                    {
-                        label: 'Sensor 3',
-                        data: chartData2.splice(0,20),
-                        fill: false,
-                        tension: 0.2,
-                        borderColor: 'rgba(90,50,200,1)',
-                        backgroundColor: "rgba(255,255,255,1)"
-                    },
-                    {
-                        label: 'Sensor 4',
-                        data: chartData2.splice(0,20),
-                        fill: false,
-                        tension: 0.2,
-                        borderColor: 'rgba(90,49,200,1)',
-                        backgroundColor: "rgba(255,255,255,1)"
-                    },
-                    {
-                        label: 'Sensor 5',
-                        data: chartData2.splice(0,20),
-                        fill: false,
-                        tension: 0.2,
-                        borderColor: 'rgba(115,42,190,1)',
-                        backgroundColor: "rgba(255,255,255,1)"
-                    },
-                    {
-                        label: 'Sensor 6',
-                        data: chartData2.splice(0,20),
-                        fill: false,
-                        tension: 0.2,
-                        borderColor: 'rgba(140,35,180,1)',
-                        backgroundColor: "rgba(255,255,255,1)"
-                    },
-                    {
-                        label: 'Sensor 7',
-                        data: chartData2.splice(0,20),
-                        fill: false,
-                        tension: 0.2,
-                        borderColor: 'rgba(165,28,170,1)',
-                        backgroundColor: "rgba(255,255,255,1)"
-                    },
-                    {
-                        label: 'Sensor 8',
-                        data: chartData2.splice(0,20),
-                        fill: false,
-                        tension: 0.2,
-                        borderColor: 'rgba(180,21,160,1)',
-                        backgroundColor: "rgba(255,255,255,1)"
-                    },
-                    {
-                        label: 'Sensor 9',
-                        data: chartData2.splice(0,20),
-                        fill: false,
-                        tension: 0.2,
-                        borderColor: 'rgba(205,14,150,1)',
-                        backgroundColor: "rgba(255,255,255,1)"
-                    },
-                    {
-                        label: 'Sensor 10',
-                        data: chartData2.splice(0,20),
-                        fill: false,
-                        tension: 0.2,
-                        borderColor: 'rgba(250, 7, 140,1)',
-                        backgroundColor: "rgba(255,255,255,1)"
-                    },
-                ]
+                datasets: mydataSet
             }}
-            height={400}
+            height={800}
             width={600}
             options={{
+                y: {
+                    max: 400,
+                    min: 0,
+                    ticks: {
+                        stepValue: 50,
+                        beginAtZero: true,
+                    }
+                },
                 maintainAspectRatio: false,
                 plugins: {
                     legend: {
@@ -110,12 +57,8 @@ const BarChart2 = (props) => {
                         }
                     }
                 },
-
-
             }}
         />
-
-
     </div>
 }
 export default BarChart2

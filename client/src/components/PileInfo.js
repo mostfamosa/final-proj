@@ -16,6 +16,7 @@ function PileInfo(props) {
   const [sesnsorAmount, setSensorAmount] = useState(0);
   const [pileheight, setheight] = useState("");
   const [pileradius, setradius] = useState("");
+  const [piledefect, setdefect] = useState("");
   const [pileID, setrandId] = useState(0);
   const [pileMix, setMix] = useState("");
   const [pileSoil, setSoil] = useState("");
@@ -44,30 +45,28 @@ function PileInfo(props) {
     var pileDefect1 = document.getElementById("pileDefect");
     var pileRadius1 = document.getElementById("pileRadius");
     var pileHeight1 = document.getElementById("pileHeight");
-    var pileDepth1 = document.getElementById("pileDepth");
     const enteredpileDefect = pileDefect1.value;
     const enteredpileID = pileID1;
     const enteredpileSoil = pileSoil1;
     const enteredRadius = pileRadius1.value;
     const enteredpileHeight = pileHeight1.value;
-    const enteredpileDepth = pileDepth1.value;
     const enteredpileMix = pileMix1;
     setheight(enteredpileHeight);
     setradius(enteredRadius);
+    setdefect(enteredpileDefect);
     const pileData = {
       pileid: enteredpileID,
       radius: enteredRadius,
       height: enteredpileHeight,
-      depth: enteredpileDepth,
       mix: enteredpileMix,
       soil: enteredpileSoil,
       sesnsorsCount: sesnsorAmount,
       hasDefect: enteredpileDefect,
     };
-   
+
 
     if (!redirect) {
-      if (pileRadius1.value === "" || pileHeight1.value === "" || pileDepth1.value === "") {
+      if (pileRadius1.value === "" || pileHeight1.value === "") {
         alert("Missing operand!");
       }
       else {
@@ -102,13 +101,11 @@ function PileInfo(props) {
   }
   //a function to find the numbers of sensors in a pile
   const findSensorsAmount = (event) => {
-    if (event.target.value > 50) {
-      const res = parseInt((event.target.value / 10 + 5) - (event.target.value / 10 + 5) % 5);
+    if (event.target.value >= 105) {
+      const res = parseInt(((event.target.value / 102) * 10 + 10) - ((event.target.value / 102) * 10 + 10) % 10);
       setSensorAmount(res);
     }
     else setSensorAmount(10);
-    if (event.target.value < 50)
-      setSensorAmount(5);
     if (event.target.value === "")
       setSensorAmount(0);
   }
@@ -117,7 +114,6 @@ function PileInfo(props) {
     <div className='container pa4 tc' >
       <img className='f1' src={logo} alt='App logo' />
       <h2 className='f1 i serif black'>Pile Information</h2>
-
       <div className='row'>
         <input placeholder={"ID : " + pileID} id='pileID' required readOnly className='item' type="input" />
         <Select options={Mixoptions} onChange={inoptionHandler} placeholder="Mix :" id='pileMix' className='item' />
@@ -131,17 +127,12 @@ function PileInfo(props) {
         <input placeholder={"Sensores Amount :" + sesnsorAmount} id='sensorAmount' required className='item' type="input" readOnly />
       </div>
       <div className='row'>
-        <input placeholder="Depth (CM) :" id='pileDepth' required className='item' type="input" />
         <input placeholder="With Defects (y/n)? :" id='pileDefect' required className='item' type="input" />
       </div>
       <p className='ph3 pa4'>
         <Link to="" type="submit" className='w-25 serif ma3 w-10 f2 br4 link dim ph2 pv2 mb2 dib black bg-light-blue bw2 bl bb i' >Home</Link>
-
-        <Link to={{ pathname: mypath, state: { pileId:pileID ,sesnsorsCount: sesnsorAmount, pileheight: pileheight, pileradius: pileradius, onAddPile: { addPileHandler } } }} onClick={renderRedirect} type="submit" id='next' className='w-25 serif  ma3 w-10 f2 br4 link dim ph2 pv2 mb2 dib black bg-light-pink bw2 bl bb i' >Next</Link>
+        <Link to={{ pathname: mypath, state: { pileId: pileID, sesnsorsCount: sesnsorAmount, pileheight: pileheight, pileradius: pileradius, piledefect: piledefect, onAddPile: { addPileHandler } } }} onClick={renderRedirect} type="submit" id='next' className='w-25 serif  ma3 w-10 f2 br4 link dim ph2 pv2 mb2 dib black bg-light-pink bw2 bl bb i' >Next</Link>
       </p>
-
-
-
     </div>
   );
 

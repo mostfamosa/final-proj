@@ -4,7 +4,6 @@ const BarChart = (props) => {
 
     const chartData = props.mydata;
 
-
     return <div>
         <Line
             data={{
@@ -16,13 +15,32 @@ const BarChart = (props) => {
                         fill: false,
                         tension: 0.2,
                         borderColor: 'rgba(250,50,50,1)',
-                        backgroundColor: "rgba(255,255,255,1)"
+                        backgroundColor: "rgba(255,255,255,1)",
+                        yAxesID: 'yAxes',
                     },
                 ]
             }}
-            height={400}
+            height={500}
             width={600}
             options={{
+                scales: {
+                    y: {
+                        id: 'yAxes',
+                        stacked: true,
+                        scaleLabel: {
+                            display: true,
+                            gridLines: {
+                                color: "rgb(210,210,211)"
+                            },
+                        },
+                        max: 400,
+                        min: 0,
+                        ticks: {
+                            stepValue: 50,
+                            beginAtZero: true,
+                        }
+                    },
+                },
                 maintainAspectRatio: false,
                 plugins: {
                     legend: {
@@ -35,12 +53,8 @@ const BarChart = (props) => {
                         }
                     }
                 },
-
-
             }}
         />
-
-
     </div>
 }
 export default BarChart

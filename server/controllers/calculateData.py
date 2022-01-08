@@ -1,13 +1,12 @@
-import random
 import math
 import numpy as np
 
-
-# def calculateCut():                                       
-#     #return {"data":data}
-#     myTemp=[]
-
 class clDisign():
+    def addBubble(self,x,y,z,r):
+        for Element in self.vElement:
+            if(Element.type==3):
+                if((x-Element.x)**2+(y-Element.y)**2+(z-Element.z)**2<r**2):
+                    Element.__makeBubble__()
     def __init__(self):
         self.vElement=[]
         self.vCut=[]
@@ -33,7 +32,7 @@ class clDisign():
         tt=tt-t_h*60*60
         t_m=int(float(tt)/(60))
         tt=tt-t_m*60
-        i=0############problem
+        i=0
 
         def Convert(string):
             li = list(string.split(" , "))
@@ -44,24 +43,11 @@ class clDisign():
             print(ElementSensor.s_get(K))
             mysensors[i]={ElementSensor.s_get(K)}
             i+=1
-        # print("---------------")
-        # print("---------------")
-        # print(1,type(mysensors[0]))
-        # print(2,mysensors)
-        # print(3,mysensors[0])
-        # print(4,mysensors[0])
-        # print(5,Convert(list(mysensors[0])[0]))
-        # print(Convert(list(mysensors[0])[0]))
         mysensorsDict=[]
 
-        #print(0,mysensors)
         for key in mysensors:
             mysensorsDict.append(Convert(list(mysensors[key])[0]))
             
-
-        # print(mysensorsDict)
-        # print("---------------")
-        # print("---------------")
         return mysensorsDict,mysensorsDict
     class clBeton():
         def __init__(self):
@@ -84,6 +70,15 @@ class clDisign():
             ru=ru0*math.exp(v)#r(u)=speed of reaction
             return ru*(self.K-K_used)
     class clElement():
+        def __makeBubble__(self):
+        
+            self.type=4
+            self.kappa=0.022#Wt/(m grad)
+            self.rho=1.225#kg/m3
+            self.c=1.01*1000#J/(kg degree)
+            self.beton=None
+
+
         def __init__(self):
             self.ElementNext=None
             self.Temperature=0
@@ -160,7 +155,7 @@ class clDisign():
                 self.r1=r1#radius max
                 self.vElement=[]
                 self.S_ring=3.1415*(r1*r1-r0*r0)
-    def startDisign(self,rBin,hMax,dl,rMax):
+    def startDisign(self,rBin,hMax,dl,rMax,isDefect):
         self.vElement=[]
         self.vElementSensor=[]
         self.vCut=[]
@@ -174,6 +169,9 @@ class clDisign():
         Element_Air=self.clElement()
         Element_Air.type=0
         Element_Air.kappa=0.022#Wt/(m grad)
+        Element_Air.rho=1.225#kg/m3
+        Element_Air.c=1.01*1000#J/(kg degree)
+
         self.vElement.append(Element_Air)
         ElementLast=Element_Air
         
@@ -233,6 +231,9 @@ class clDisign():
             h1+=dh
             iCut+=1
             self.vCut.append(cut)
+            #Add Bubbles to the pile
+            if(isDefect):
+                self.addBubble(0,0,-0.1,0.2)
         print("Elements:  finished  n="+str(len(self.vElement)))
         
         
@@ -361,7 +362,7 @@ class clDisign():
             iCut+=1
         print("Sides:  finished  n="+str(len(self.vElement)))
 
-def main():
+def main(myhMax,myRbin,isDefect):
     Disign=clDisign()
     rBin=0.5#m  radius of the pile
     hMax=5#m
@@ -369,31 +370,26 @@ def main():
     rMax=3#m   the interesting parts of the ground around the pile
     #1 minute
 
-    rBin=0.5#m
-    hMax=1#m
+    rBin=myRbin#m
+    hMax=myhMax#m 
     dl=0.1#m
-    rMax=1#m
-
-    Disign.startDisign(rBin,hMax,dl,rMax)
+    rMax=myRbin*2#m
+    Disign.startDisign(rBin,hMax,dl,rMax,isDefect)
     Disign.restart() 
     #return you to the state of initialize temperature
     #and Hardened State
     dt=20#60#*60 Time step 
-    #iElement=3
-    #print(str(Disign.vElement[iElement].Temperature))
+
     #30 sec
     beton=Disign.clBeton()
     K=beton.K
     Disign.print_sensors(0,K)
     t=0
     arrr=[]
-    for j in range(20):##############################
+    for j in range(20):
         for i in range(100):#each time step
             Disign.timeStep(dt)
             t+=dt
-        #print(str(Disign.vElement[iElement].Temperature))
-        #Disign.timeStep(dt)
-        #print(str(Disign.vElement[iElement].Temperature))
         mysensorsStr,mysensorsDict=Disign.print_sensors(t,K)
         arrr.append(mysensorsDict)
     return arrr

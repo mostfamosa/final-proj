@@ -2,7 +2,7 @@ import React from 'react';
 import './Switch.css';
 import './SensorsInfo.css'
 
-const Switch = ({isOn,handleToggle,onColor}) => {
+const Switch = ({ isOn, handleToggle, onColor }) => {
   return (
     <div>
       <input
@@ -13,11 +13,11 @@ const Switch = ({isOn,handleToggle,onColor}) => {
         type="checkbox"
       />
       <label
-          style={{ background: isOn && '#06D6A0' }}
-          className="react-switch-label"
-          htmlFor={`react-switch-new`}
+        style={{ background: isOn && '#06D6A0' }}
+        className="react-switch-label"
+        htmlFor={`react-switch-new`}
       >
-        
+
         <span className={`react-switch-button`} />
       </label>
     </div>

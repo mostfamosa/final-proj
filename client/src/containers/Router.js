@@ -11,6 +11,7 @@ import mySupport from "../components/support"
 import notAvaiable from "../components/notAvaiable"
 import reports from "../components/reports"
 
+
 class Router extends React.Component{
     render(){
         return(
@@ -28,7 +29,7 @@ class Router extends React.Component{
                         <Route path="/support" component={mySupport}/>
                         <Route path="/notAvaiable" component={notAvaiable}/>
                         <Route path="/reports" component={reports}/>
-
+                        <Route path="/notAviable" component={notAvaiable}/>
 
 
                     </Switch>
