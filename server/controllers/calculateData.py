@@ -2,7 +2,7 @@ import math
 import numpy as np
 
 class clDisign():
-    def addBubble(self,x,y,z,r):
+    def addBubble(self,x,y,z,r):#add bubble in (x,y,z) with radius = r
         for Element in self.vElement:
             if(Element.type==3):
                 if((x-Element.x)**2+(y-Element.y)**2+(z-Element.z)**2<r**2):

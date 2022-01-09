@@ -10,7 +10,9 @@ const Mixoptions = [{ value: 'regular', label: 'Regular' }]
 const Soiloptions = [{ value: 'regular', label: 'Regular' }]
 
 
-
+//functional component of pile information page
+//the page can calculate the  number of the sensorss according to the height of the pile
+//also it do validation input
 function PileInfo(props) {
   const pileInfoRef = useRef();
   const [sesnsorAmount, setSensorAmount] = useState(0);
@@ -77,7 +79,7 @@ function PileInfo(props) {
       }
     }
   }
-
+//save the pile information in the firebase
   function addPileHandler(pileData) {
     fetch('https://buildtech-final-project-default-rtdb.firebaseio.com/piles.json'
       , {

@@ -7,16 +7,15 @@ import LineChart2 from './LineChart2'
 import ProgressFile from './progressfile'
 import Select from 'react-select'
 
-
+//functional component that show you the graph of selected sensor temperatue to time and save the results in firebase
 function ReportPage(props) {
   const [chartData, setChartData] = useState([]);
   const [chartData2, setChartData2] = useState([]);
-  const [mypileid] = useState(props.myprops);
   const [pileDefect] = useState(props.pileDefect);
   const [serverData] = useState(props.serverData);
   const [isLoading, setIsLoading] = useState(true);
   const [myTempData, setmyTempData] = useState([]);
-  const [myTempData2, setmyTempData2] = useState([]);
+  const [myTempData2] = useState([]);
   const [myTempDataforEachSensor] = useState([]);
   let Sensoroptions = [];
 
@@ -46,7 +45,7 @@ function ReportPage(props) {
       }
     }
     var comment = "All Sensors";
-    if (pileDefect == 'y')
+    if (pileDefect === 'y')
       comment = "All Sensors With Defect";
     else
       comment = "All Sensors";
@@ -85,11 +84,7 @@ function ReportPage(props) {
 
     }
 
-    const resultData = {
-      resultTime: Date().toLocaleString(),
-      result: [myTempData],
-      sensorNumber: event.value
-    };
+
     setChartData(myTempData);
     console.log("myTempData");
     console.log(myTempData);

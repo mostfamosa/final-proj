@@ -5,12 +5,12 @@ import { withRouter } from "react-router";
 import Select from 'react-select'
 import './SensorsInfo.css'
 import Switch from './Switch'
-import { rand } from './helpFunc'
 
 
 
 
-
+//functional component of sensor information that all the user have to do is set the status to active and click next to start the simulation
+//also it can calculate the cuts of the pile and the positioning of the sensors
 function Sensorsinfo() {
     const location = useLocation()
     const { pileId, sesnsorsCount, pileheight, pileradius, piledefect } = location.state
@@ -65,7 +65,6 @@ function Sensorsinfo() {
     }
 
     const saveHandler = (event) => {
-        //console.log(sensorID);
         let flag = true;
         if (mySensors.length === 0) {
             mySensors.push({ pileid: pileID, id: sensorID, outsideTemp: outsideTemp, x: myX, y: myY, z: myZ, Temp: Temp, Status: sensorStatus });

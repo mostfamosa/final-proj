@@ -4,7 +4,7 @@ import logo2 from './notAviable.PNG'
 import { Link } from 'react-router-dom'
 import './support.css'
 
-
+//functional component page for unavaiable pages
 function notAvaiable() {
 
 

@@ -5,6 +5,7 @@ app=Flask(__name__)
 
 @app.route("/calculateData", methods=['POST'])
 def __calculateData__():
+    #get the parameters ready from the client to start the simulation and in finish return the data of the simulation
     from controllers import calculateData
     data = request.json
     myhMax=int(data.get('height'))/100.0
@@ -18,7 +19,6 @@ def __calculateData__():
     
     moose=calculateData.main(myhMax,myRbin,isDefect)
     josn_dump=json.dumps(moose)
-    json_object=json.loads(josn_dump)
     return {"data":moose}
 
 if __name__ == "__main__":

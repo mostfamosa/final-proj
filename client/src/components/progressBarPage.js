@@ -6,11 +6,12 @@ import ReportPage from './reportPage'
 import { useLocation } from 'react-router-dom'
 
 
-
+//functional component of a progress bar that sends the data to the server to begin the simulation
+//and when the simulation is finished it will redirect the user to the report page for results
 function ProgressBarPage() {
 
   const location = useLocation()
-  const { pileId, mySensorsData, pileheight, pileradius, piledefect } = location.state
+  const { pileId, pileheight, pileradius, piledefect } = location.state
   const [redirect, setredirect] = useState(false);
   const [myServerData, setServerData] = useState([{}]);
   const [progressTime, setprogress] = useState(1000);
@@ -19,8 +20,6 @@ function ProgressBarPage() {
 
 
   useEffect(() => {
-    // console.log("******")
-    // console.log(mySensorsData);
     setTimeout(() => {
       if (myServerData.length > 0) {
         fetch("/calculateData"
@@ -49,6 +48,7 @@ function ProgressBarPage() {
       }
 
     }, progressTime);
+      // eslint-disable-next-line
   }, [myServerData.length]);
 
   return redirect ? <ReportPage myprops={pileId} pileDefect={piledefect} serverData={myServerData.data} /> : <ProgressFile />

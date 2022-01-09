@@ -2,7 +2,8 @@ import React from "react";
 import { Line } from 'react-chartjs-2'
 
 
-
+//get data with props and dynamiclly process the data and show it in graph
+//we use this component to show all the sensors in one graph
 const BarChart2 = (props) => {
 
     const chartData2 = props.mydata;

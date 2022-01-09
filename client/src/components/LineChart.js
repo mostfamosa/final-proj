@@ -1,7 +1,7 @@
 import React from "react";
 import { Line } from 'react-chartjs-2'
 const BarChart = (props) => {
-
+    //we get the data with props and show it in graph for the user
     const chartData = props.mydata;
 
     return <div>

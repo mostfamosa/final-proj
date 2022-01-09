@@ -6,6 +6,7 @@ import { SidebarData } from './SidebarData';
 import './Navbar.css';
 import { IconContext } from 'react-icons';
 
+//functional component of the menu
 function Navbar() {
   const [sidebar, setSidebar] = useState(false);
 

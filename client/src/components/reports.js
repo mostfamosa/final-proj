@@ -2,17 +2,14 @@ import React, { useState, useEffect } from 'react'
 import logo from './logo.PNG'
 import { Link } from 'react-router-dom'
 import './reportPage.css'
-import LineChart from './LineChart'
 import LineChart2 from './LineChart2'
 import ProgressFile from './progressfile'
 
 
 function Reports() {
     const [isLoading, setIsLoading] = useState(true);
-    const [chartsData, setChart] = useState([]);
     const [chartsData2, setChart2] = useState([]);
-    const [reportsList] = useState([]);
-    const [reportsList2, setreportsList2] = useState([]);
+    const [reportsList2] = useState([]);
 
     let mychartsData = [];
 
