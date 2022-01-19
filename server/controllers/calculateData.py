@@ -373,7 +373,7 @@ def main(myhMax,myRbin,isDefect):
     rBin=myRbin#m
     hMax=myhMax#m 
     dl=0.1#m
-    rMax=myRbin*2#m
+    rMax=myRbin*2#m  the interesting parts of the ground around the pile
     Disign.startDisign(rBin,hMax,dl,rMax,isDefect)
     Disign.restart() 
     #return you to the state of initialize temperature
@@ -392,7 +392,7 @@ def main(myhMax,myRbin,isDefect):
             t+=dt
         mysensorsStr,mysensorsDict=Disign.print_sensors(t,K)
         arrr.append(mysensorsDict)
-    return arrr
+    return arrr #return all of the data to the client
     #exit
     #cd C:\Frenkel\Braude\2021a\beton\
     #python C:\Frenkel\Braude\2021a\beton\beton.py

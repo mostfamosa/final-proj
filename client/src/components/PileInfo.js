@@ -68,7 +68,7 @@ function PileInfo(props) {
 
 
     if (!redirect) {
-      if (pileRadius1.value === "" || pileHeight1.value === "") {
+      if (enteredRadius === "" || enteredpileHeight === ""||enteredpileDefect===""|| enteredpileMix==="" || enteredpileSoil==="") {
         alert("Missing operand!");
       }
       else {
